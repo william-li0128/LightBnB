@@ -156,12 +156,12 @@ exports.getAllReservations = getAllReservations;
   if (options.minimum_rating) {
     queryParams.push(Number(options.minimum_rating));
     queryString += `
-    GROUP BY properties.id, property_reviews.id
+    GROUP BY properties.id, property_reviews.property_id
     HAVING avg(property_reviews.rating) >= $${queryParams.length} 
     `;
   } else {
     queryString += `
-    GROUP BY properties.id, property_reviews.id
+    GROUP BY properties.id, property_reviews.property_id
     `;
   }
 
@@ -173,6 +173,7 @@ exports.getAllReservations = getAllReservations;
   `;
 
   // Run the query
+  console.log(queryString, queryParams);
   return pool.query(queryString, queryParams).then((res) => res.rows);
 };
 exports.getAllProperties = getAllProperties;

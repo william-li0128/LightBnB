@@ -4,6 +4,7 @@ A database application project developed as a part of Lighthouse Labs Web develo
 
 # Project Structure
 * Setup related files
+  * `docs` documentation info
   * `migrations` files related to creating the database, and its schema
   * `seeds` database fake data used
   * `1_queries` sample database queries

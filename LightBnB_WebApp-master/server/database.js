@@ -1,5 +1,3 @@
-const properties = require('./json/properties.json');
-const users = require('./json/users.json');
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -46,7 +44,6 @@ const getUserWithId = function(id) {
     });
 }
 exports.getUserWithId = getUserWithId;
-
 
 /**
  * Add a new user to the database.
@@ -107,7 +104,7 @@ exports.getAllReservations = getAllReservations;
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 
- const getAllProperties = function (options, limit = 10) {
+ const getAllProperties = function(options, limit = 10) {
   // Setup an array to hold any parameters
   const queryParams = [];
   let countOptions;
@@ -180,7 +177,6 @@ exports.getAllReservations = getAllReservations;
 };
 exports.getAllProperties = getAllProperties;
 
-
 /**
  * Add a property to the database
  * @param {{}} property An object containing all of the property details.
@@ -188,13 +184,11 @@ exports.getAllProperties = getAllProperties;
  */
 
 const addProperty = function(property) {
-
   const input = [];
   const keys = ["owner_id", "title", "description", "thumbnail_photo_url", "cover_photo_url", "cost_per_night", "street", "city", "province", "post_code", "country", "parking_spaces", "number_of_bathrooms", "number_of_bedrooms"];
   for (const key of keys) {
     input.push(property[key]);
   }
-
   return pool
     .query(`INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
@@ -206,5 +200,4 @@ const addProperty = function(property) {
       console.log(err.message);
     });
 }
-
 exports.addProperty = addProperty;
